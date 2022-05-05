@@ -1,12 +1,17 @@
 <template>
-  <div>
-    <v-form-container
-      title="New Post"
-      @onCancel="$inertia.visit('/post')"
-      @onSubmit="save"
-      cancel-text="Back"
-    >
-      <div class="flex flex-col space-y-4">
+  <div class="grid grid-cols-12 gap-4 mb-[100px]">
+    <div class="col-span-12 lg:col-span-8 min-h-screen">
+      <v-quill-editor
+        theme="snow"
+        toolbar="full"
+        class="h-full"
+        ref="quillEditor"
+        content-type="html"
+        v-model:content="form.content"
+      />
+    </div>
+    <div class="col-span-12 lg:col-span-4">
+      <div class="flex flex-col space-y-4 bg-gray-300 shadow p-4 rounded">
         <v-text
           label="Title"
           :required="true"
@@ -27,14 +32,16 @@
           v-model="form.category"
           :error="form.errors.category"
         />
-        <v-textarea
-          label="Content"
-          :required="true"
-          v-model="form.content"
-          :error="form.errors.content"
-        />
+        <div class="flex flex-row space-x-2">
+          <v-loading-button2 text="Preview" />
+          <v-loading-button2
+            text="Save"
+            @click.prevent="save"
+            :loading="form.processing"
+          />
+        </div>
       </div>
-    </v-form-container>
+    </div>
   </div>
 </template>
 <script>
@@ -52,7 +59,10 @@ export default {
   methods: {
     save() {
       this.form.post(`/post`, {
-        onSuccess: () => this.form.reset(),
+        onSuccess: () => {
+          this.form.reset();
+          this.$refs.quillEditor.setHTML(null);
+        },
       });
     },
   },

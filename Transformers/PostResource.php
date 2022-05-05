@@ -2,9 +2,9 @@
 
 namespace Modules\Post\Transformers;
 
-use App\Models\User;
+use Modules\User\Entities\User;
+use Modules\User\Transformers\UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Modules\User\Transformers\AuthorResource;
 
 class PostResource extends JsonResource
 {
@@ -17,7 +17,8 @@ class PostResource extends JsonResource
     public function toArray($request)
     {
         return array_merge(parent::toArray($request), [
-            'author' => new AuthorResource(User::find($this->created_by)),
+            'category' => new CategoryResource($this->category),
+            'author' => new UserResource(User::find($this->created_by)),
         ]);
     }
 }

@@ -2,9 +2,9 @@
 
 namespace Modules\Post\Transformers;
 
-use App\Models\User;
+use Modules\User\Entities\User;
+use Modules\User\Transformers\UserResource;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Modules\User\Transformers\AuthorResource;
 
 class CategoryResource extends JsonResource
 {
@@ -15,7 +15,7 @@ class CategoryResource extends JsonResource
             'name' => $this->name,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'author' => new AuthorResource(User::find($this->created_by)),
+            'author' => new UserResource(User::find($this->created_by)),
         ];
     }
 }

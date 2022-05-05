@@ -31,6 +31,8 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
+        $post->load('category');
+
         return inertia('Post::post/edit')->with(['post' => $post])
             ->title(__('Update post'));
     }

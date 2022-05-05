@@ -18,7 +18,7 @@ class PostAction
     public static function update(Post $post, PostRequest $request)
     {
         DB::transaction(function () use ($post, $request) {
-            $post->update($request->validated());
+            $post->update($request->getData());
         });
     }
 

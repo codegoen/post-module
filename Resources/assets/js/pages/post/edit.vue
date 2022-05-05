@@ -1,13 +1,17 @@
 <template>
-  <div>
-    <v-form-container
-      title="New Post"
-      @onCancel="$inertia.visit('/post')"
-      @onSubmit="update"
-      cancel-text="Back"
-      submit-text="Update"
-    >
-      <div class="flex flex-col space-y-4">
+  <div class="grid grid-cols-12 gap-4 mb-[100px]">
+    <div class="col-span-12 lg:col-span-8 min-h-screen">
+      <v-quill-editor
+        theme="snow"
+        toolbar="full"
+        class="h-full"
+        ref="quillEditor"
+        content-type="html"
+        v-model:content="form.content"
+      />
+    </div>
+    <div class="col-span-12 lg:col-span-4">
+      <div class="flex flex-col space-y-4 bg-gray-300 shadow p-4 rounded">
         <v-text
           label="Title"
           :required="true"
@@ -20,14 +24,24 @@
           v-model="form.slug"
           :error="form.errors.slug"
         />
-        <v-textarea
-          label="Content"
+        <v-multi-select
+          label="Category"
           :required="true"
-          v-model="form.content"
-          :error="form.errors.content"
+          :create-option="true"
+          url="select/category"
+          v-model="form.category"
+          :error="form.errors.category"
         />
+        <div class="flex flex-row space-x-2">
+          <v-loading-button2 text="Preview" />
+          <v-loading-button2
+            text="Update"
+            @click.prevent="update"
+            :loading="form.processing"
+          />
+        </div>
       </div>
-    </v-form-container>
+    </div>
   </div>
 </template>
 <script>
@@ -40,6 +54,10 @@ export default {
       form: this.$inertia.form({
         title: this.post.title,
         slug: this.post.slug,
+        category: {
+          value: this.post.category.id,
+          label: this.post.category.name,
+        },
         content: this.post.content,
       }),
     };
@@ -47,7 +65,7 @@ export default {
   methods: {
     update() {
       this.form.put(`/post/${this.post.id}`, {
-        //
+        onSuccess: () => console.log("success updated"),
       });
     },
   },
