@@ -31,8 +31,8 @@ it('can add new post', function () {
         'content' => Str::random(10),
         'category' => [
             'value' => 'New Category',
-            'label' => 'New Category'
-        ]
+            'label' => 'New Category',
+        ],
     ];
 
     $this->post(route('post.store'), $data)

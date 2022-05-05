@@ -24,6 +24,6 @@ class CategoryJsonController extends Controller
 
     public function store(CategoryRequest $request)
     {
-        // 
+        //
     }
 }

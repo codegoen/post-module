@@ -2,8 +2,8 @@
 
 namespace Modules\Post\Providers;
 
-use App\Models\User;
 use Illuminate\Support\ServiceProvider;
+use Modules\User\Entities\User;
 use Nedwors\Navigator\Facades\Nav;
 
 class NavigatorServiceProvider extends ServiceProvider

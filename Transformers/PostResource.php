@@ -17,7 +17,7 @@ class PostResource extends JsonResource
     public function toArray($request)
     {
         return array_merge(parent::toArray($request), [
-            'author' => new AuthorResource(User::find($this->created_by))
+            'author' => new AuthorResource(User::find($this->created_by)),
         ]);
     }
 }
