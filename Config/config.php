@@ -4,6 +4,6 @@ return [
     'name' => 'Post',
 
     'migration' => [
-        'prefix' => 'post'
+        'prefix' => 'post',
     ],
 ];

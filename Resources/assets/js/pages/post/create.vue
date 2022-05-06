@@ -1,6 +1,6 @@
 <template>
-  <div class="grid grid-cols-12 gap-4 mb-[100px]">
-    <div class="col-span-12 lg:col-span-8 min-h-screen">
+  <div class="mb-[100px] grid grid-cols-12 gap-4">
+    <div class="col-span-12 min-h-screen lg:col-span-8">
       <v-quill-editor
         theme="snow"
         toolbar="full"
@@ -11,7 +11,7 @@
       />
     </div>
     <div class="col-span-12 lg:col-span-4">
-      <div class="flex flex-col space-y-4 bg-gray-300 shadow p-4 rounded">
+      <div class="flex flex-col space-y-4 rounded bg-gray-300 p-4 shadow">
         <v-text
           label="Title"
           :required="true"

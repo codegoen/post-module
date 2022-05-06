@@ -10,21 +10,21 @@ class PostAction
 {
     public static function create(PostRequest $request)
     {
-        DB::transaction(function () use ($request) {
+        return DB::transaction(function () use ($request) {
             Post::create($request->getData());
         });
     }
 
     public static function update(Post $post, PostRequest $request)
     {
-        DB::transaction(function () use ($post, $request) {
+        return DB::transaction(function () use ($post, $request) {
             $post->update($request->getData());
         });
     }
 
     public static function destroy(Post $post)
     {
-        DB::transaction(function () use ($post) {
+        return DB::transaction(function () use ($post) {
             $post->delete();
         });
     }

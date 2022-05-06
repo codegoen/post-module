@@ -56,6 +56,10 @@ it('can update existing post', function () {
         'title' => 'new title',
         'slug' => $post->slug,
         'content' => $post->content,
+        'category' => [
+            'value' => 'Laravel',
+            'label' => 'Laravel',
+        ],
     ])->assertSessionHasNoErrors();
 
     $this->assertDatabaseCount('posts', 1);

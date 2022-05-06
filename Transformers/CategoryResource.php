@@ -2,9 +2,9 @@
 
 namespace Modules\Post\Transformers;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Modules\User\Entities\User;
 use Modules\User\Transformers\UserResource;
-use Illuminate\Http\Resources\Json\JsonResource;
 
 class CategoryResource extends JsonResource
 {
