@@ -9,10 +9,10 @@ beforeEach(function () {
 });
 
 it('has category json', function () {
-    $category = Category::factory()->create([
+    Category::factory()->create([
         'name' => 'test-name',
     ]);
 
-    $res = $this->getJson(url("/api/v1/category/{$category->id}"));
-    expect($res)->toBeObject(); // correct (?)
+    $res = $this->getJson(url("/api/v1/categories"));
+    expect($res)->toBeObject();
 });
