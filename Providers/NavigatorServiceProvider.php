@@ -22,6 +22,10 @@ class NavigatorServiceProvider extends ServiceProvider
                             ->for('/category')
                             ->heroicon('TagIcon')
                             ->icon('outline'),
+                        Nav::item(__('Subscribers'))
+                            ->for('/subscribers')
+                            ->heroicon('MailIcon')
+                            ->icon('outline'),
                     ]
                 ),
             ];

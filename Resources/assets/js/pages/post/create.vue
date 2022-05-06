@@ -1,13 +1,13 @@
 <template>
   <div class="mb-[100px] grid grid-cols-12 gap-4">
     <div class="col-span-12 min-h-screen lg:col-span-8">
-      <v-quill-editor
-        theme="snow"
-        toolbar="full"
-        class="h-full"
-        ref="quillEditor"
-        content-type="html"
-        v-model:content="form.content"
+      <v-editor
+        v-model="form.content"
+        @input="
+          (value) => {
+            form.content = value;
+          }
+        "
       />
     </div>
     <div class="col-span-12 lg:col-span-4">
@@ -58,12 +58,7 @@ export default {
   },
   methods: {
     save() {
-      this.form.post(`/post`, {
-        onSuccess: () => {
-          this.form.reset();
-          this.$refs.quillEditor.setHTML(null);
-        },
-      });
+      this.form.post(`/post`);
     },
   },
   watch: {

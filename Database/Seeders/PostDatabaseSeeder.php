@@ -4,6 +4,9 @@ namespace Modules\Post\Database\Seeders;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
+use Modules\Post\Entities\Category;
+use Modules\Post\Entities\Post;
+use Modules\User\Entities\User;
 
 class PostDatabaseSeeder extends Seeder
 {
@@ -16,6 +19,13 @@ class PostDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call("OthersTableSeeder");
+        Category::factory(10)->create([
+            'created_by' => User::first(),
+        ])->each(function ($c) {
+            Post::factory()->cretae([
+                'category_id' => $c->id,
+                'created_by' => User::first(),
+            ]);
+        });
     }
 }

@@ -26,7 +26,7 @@ class PostController extends Controller
     {
         PostAction::create($request);
 
-        return back()->with(['success' => 'Successfully add new post']);
+        return redirect()->route('post.index')->with(['success' => 'Successfully add new post']);
     }
 
     public function edit(Post $post)
@@ -41,7 +41,7 @@ class PostController extends Controller
     {
         PostAction::update($post, $request);
 
-        return back()->with(['success' => 'Successfully update existing post']);
+        return redirect()->route('post.index')->with(['success' => 'Successfully update existing post']);
     }
 
     public function destroy(Post $post)

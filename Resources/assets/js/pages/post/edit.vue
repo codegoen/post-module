@@ -1,13 +1,14 @@
 <template>
   <div class="mb-[100px] grid grid-cols-12 gap-4">
     <div class="col-span-12 min-h-screen lg:col-span-8">
-      <v-quill-editor
-        theme="snow"
-        toolbar="full"
-        class="h-full"
-        ref="quillEditor"
-        content-type="html"
-        v-model:content="form.content"
+      <v-editor
+        v-model="form.content"
+        :value="form.content"
+        @input="
+          (value) => {
+            form.content = value;
+          }
+        "
       />
     </div>
     <div class="col-span-12 lg:col-span-4">
@@ -35,8 +36,8 @@
         <div class="flex flex-row space-x-2">
           <v-loading-button2 text="Preview" />
           <v-loading-button2
-            text="Update"
-            @click.prevent="update"
+            text="Save"
+            @click.prevent="save"
             :loading="form.processing"
           />
         </div>
@@ -63,9 +64,11 @@ export default {
     };
   },
   methods: {
-    update() {
+    save() {
       this.form.put(`/post/${this.post.id}`, {
-        onSuccess: () => console.log("success updated"),
+        onSuccess: () => {
+          this.form.reset();
+        },
       });
     },
   },
