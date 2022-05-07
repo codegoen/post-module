@@ -3,14 +3,14 @@
 namespace Modules\Post\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use Modules\Core\Abstracts\CoreController;
 use Modules\Post\Entities\Category;
 use Spatie\QueryBuilder\QueryBuilder;
 use Modules\Post\Http\Requests\CategoryRequest;
 use Modules\Post\Transformers\CategoryResource;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
-class CategoryJsonController extends Controller
+class CategoryJsonController extends CoreController
 {
     /**
      * @OA\Get(
@@ -52,7 +52,7 @@ class CategoryJsonController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/api/v1/categories/{id}?include=posts",
+     *      path="/api/v1/categories/{id}",
      *      operationId="readCategoryById",
      *      tags={"Category"},
      *      summary="Get Category based on id",
@@ -62,15 +62,6 @@ class CategoryJsonController extends Controller
      *          required=true,
      *          in="path",
      *          example="f6f16655-588b-49c5-b620-d2791a6c925c",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Parameter(
-     *          name="include",
-     *          required=false,
-     *          in="query",
-     *          example="posts",
      *          @OA\Schema(
      *              type="string"
      *          )

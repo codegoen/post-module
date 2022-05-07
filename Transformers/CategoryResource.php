@@ -3,7 +3,7 @@
 namespace Modules\Post\Transformers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Modules\User\Transformers\UserResource;
+use Modules\Core\Transformers\UserResource;
 
 class CategoryResource extends JsonResource
 {

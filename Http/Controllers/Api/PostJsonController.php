@@ -3,12 +3,12 @@
 namespace Modules\Post\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use Modules\Core\Abstracts\CoreController;
 use Modules\Post\Entities\Post;
 use Modules\Post\Transformers\PostResource;
 use TiMacDonald\JsonApi\JsonApiResourceCollection;
 
-class PostJsonController extends Controller
+class PostJsonController extends CoreController
 {
     /**
      * @OA\Get(
@@ -17,15 +17,6 @@ class PostJsonController extends Controller
      *      tags={"Post"},
      *      summary="List of Post",
      *      description="Returns list of Post",
-     *      @OA\Parameter(
-     *          name="include",
-     *          required=false,
-     *          in="query",
-     *          example="author",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
      *      @OA\Response(response=200, description="Successful operation"),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=401, description="Unauthorized"),
@@ -41,7 +32,7 @@ class PostJsonController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/api/v1/posts/{id}?include=category",
+     *      path="/api/v1/posts/{id}",
      *      operationId="readPostById",
      *      tags={"Post"},
      *      summary="Get Post based on id",
@@ -51,15 +42,6 @@ class PostJsonController extends Controller
      *          required=true,
      *          in="path",
      *          example="7fe911d0-0473-4b47-8fb3-97dccbd47e19",
-     *          @OA\Schema(
-     *              type="string"
-     *          )
-     *      ),
-     *      @OA\Parameter(
-     *          name="include",
-     *          required=false,
-     *          in="query",
-     *          example="category",
      *          @OA\Schema(
      *              type="string"
      *          )

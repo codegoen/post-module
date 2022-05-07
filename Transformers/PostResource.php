@@ -3,7 +3,7 @@
 namespace Modules\Post\Transformers;
 
 use Illuminate\Http\Request;
-use Modules\User\Transformers\UserResource;
+use Modules\Core\Transformers\UserResource;
 use TiMacDonald\JsonApi\JsonApiResource;
 
 class PostResource extends JsonApiResource
