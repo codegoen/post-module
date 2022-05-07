@@ -6,8 +6,9 @@ const state = () => ({
 
 const actions = {
   async setCategory(state, id) {
-    const { data } = await axios.get(`/api/v1/category/${id}`);
-    state.commit("setCategory", data.data);
+    console.log(state, id);
+    // const { data } = await axios.get(`/api/v1/category/${id}`);
+    // state.commit("setCategory", data.data);
   },
 };
 

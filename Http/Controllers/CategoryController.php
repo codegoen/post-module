@@ -8,7 +8,6 @@ use Inertia\Response;
 use Modules\Post\Datatable\CategoryDatatable;
 use Modules\Post\Entities\Category;
 use Modules\Post\Http\Requests\CategoryRequest;
-use Modules\Post\Transformers\CategoryResource;
 
 class CategoryController extends Controller
 {

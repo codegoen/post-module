@@ -5,8 +5,10 @@ namespace Modules\Post\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Post\Entities\Category;
+use Spatie\QueryBuilder\QueryBuilder;
+use Modules\Post\Http\Requests\CategoryRequest;
 use Modules\Post\Transformers\CategoryResource;
-use TiMacDonald\JsonApi\JsonApiResourceCollection;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class CategoryJsonController extends Controller
 {
@@ -18,10 +20,10 @@ class CategoryJsonController extends Controller
      *      summary="List of Category",
      *      description="Returns list of Category",
      *      @OA\Parameter(
-     *          name="include",
+     *          name="filter[name]",
      *          required=false,
      *          in="query",
-     *          example="author",
+     *          example="laravel",
      *          @OA\Schema(
      *              type="string"
      *          )
@@ -32,11 +34,20 @@ class CategoryJsonController extends Controller
      *      @OA\Response(response=402, description="Payment Required"),
      * )
      */
-    public function index(Request $request): JsonApiResourceCollection
+    public function index(Request $request): AnonymousResourceCollection
     {
-        return CategoryResource::collection(
-            Category::query()->whereLike('name', $request->query('q'))->latest()->paginate($request->query('limit', 10))
-        );
+        $categories = QueryBuilder::for(Category::class)->allowedFilters(['name', 'author.username'])
+            ->allowedSorts(['name', 'posts_count'])->withCount('posts')->latest()
+            ->paginate($request->query('limit', 10));
+
+        return CategoryResource::collection($categories);
+    }
+
+    public function store(CategoryRequest $request)
+    {
+        $category = Category::create($request->validated());
+
+        return CategoryResource::make($category);
     }
 
     /**

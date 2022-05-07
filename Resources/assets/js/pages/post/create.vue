@@ -33,7 +33,6 @@
           :error="form.errors.category"
         />
         <div class="flex flex-row space-x-2">
-          <v-loading-button2 text="Preview" />
           <v-loading-button2
             text="Save"
             @click.prevent="save"

@@ -2,27 +2,20 @@
 
 namespace Modules\Post\Transformers;
 
-use Illuminate\Http\Request;
-use TiMacDonald\JsonApi\JsonApiResource;
-use Modules\Post\Transformers\PostResource;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Modules\User\Transformers\UserResource;
 
-class CategoryResource extends JsonApiResource
+class CategoryResource extends JsonResource
 {
-    protected function toAttributes(Request $request): array
+    public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-        ];
-    }
-
-    protected function toRelationships(Request $request): array
-    {
-        return [
-            'posts' => fn () => PostResource::collection($this->posts),
-            'author' => fn () => UserResource::make($this->author),
+            'posts_count' => $this->posts_count,
+            'author' => UserResource::make($this->author)
         ];
     }
 }

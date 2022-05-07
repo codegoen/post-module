@@ -3,7 +3,7 @@
 namespace Modules\Post\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Modules\User\Entities\User;
+use Modules\Core\Entities\User;
 use Nedwors\Navigator\Facades\Nav;
 
 class NavigatorServiceProvider extends ServiceProvider
@@ -22,8 +22,8 @@ class NavigatorServiceProvider extends ServiceProvider
                             ->for('/category')
                             ->heroicon('TagIcon')
                             ->icon('outline'),
-                        Nav::item(__('Subscribers'))
-                            ->for('/subscribers')
+                        Nav::item(__('Subscriber'))
+                            ->for('/subscriber')
                             ->heroicon('MailIcon')
                             ->icon('outline'),
                     ]

@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Modules\User\Entities\Relations\HasAuthor;
-use Modules\User\Entities\Traits\HasUuid;
+use Modules\Core\Entities\Relations\HasAuthor;
+use Modules\Core\Entities\Traits\HasUuid;
 
 class Category extends Model
 {

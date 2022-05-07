@@ -41,45 +41,12 @@
   </v-inertable>
 </template>
 <script>
-import { mapGetters } from "vuex";
-
 export default {
   props: {
     inertable: Object,
   },
-  computed: mapGetters({
-    tag: "tag/getTag",
-  }),
   methods: {
-    create() {
-      this.$modal.open({
-        title: "New Tag",
-        component: require("./create.vue").default,
-      });
-    },
-    async edit(id) {
-      await this.$store.dispatch("tag/setTag", id);
-
-      this.$modal.open({
-        title: "Update Tag",
-        tag: this.tag,
-        component: require("./edit.vue").default,
-      });
-    },
-    destroy(id) {
-      this.$modal.destroy({
-        title: "Are you sure?",
-        message: "This will permanently delete the tag from database",
-        onCancel: () => this.$modal.close(),
-        onAccept: () => {
-          this.$inertia.delete(`/tag/${id}`, {
-            onSuccess: () => {
-              this.$modal.close();
-            },
-          });
-        },
-      });
-    },
+    // 
   },
 };
 </script>

@@ -3,8 +3,8 @@
 namespace Modules\Post\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use Modules\Post\Entities\Post;
 use Illuminate\Routing\Controller;
+use Modules\Post\Entities\Post;
 use Modules\Post\Transformers\PostResource;
 use TiMacDonald\JsonApi\JsonApiResourceCollection;
 

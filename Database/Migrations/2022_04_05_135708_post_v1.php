@@ -28,6 +28,8 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('email')->unique();
             $table->string('name')->nullable();
+            $table->timestamp('subscribe_at');
+            $table->timestamp('unsubscribe_at')->nullable();
             $table->timestamps();
         });
     }

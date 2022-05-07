@@ -13,6 +13,6 @@ it('has category json', function () {
         'name' => 'test-name',
     ]);
 
-    $res = $this->getJson(url("/api/v1/categories"));
+    $res = $this->getJson(url('/api/v1/categories'));
     expect($res)->toBeObject();
 });
