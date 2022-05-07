@@ -15,7 +15,7 @@ class CategoryResource extends JsonResource
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'posts_count' => $this->posts_count,
-            'author' => UserResource::make($this->author)
+            'author' => UserResource::make($this->author),
         ];
     }
 }

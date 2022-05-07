@@ -25,4 +25,3 @@ class SubscriberFactory extends Factory
         ];
     }
 }
-

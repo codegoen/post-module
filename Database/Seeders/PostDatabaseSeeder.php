@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Modules\Post\Entities\Category;
 use Modules\Post\Entities\Post;
-use Modules\User\Entities\User;
+use Modules\Core\Entities\User;
 
 class PostDatabaseSeeder extends Seeder
 {
@@ -17,15 +17,21 @@ class PostDatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Model::unguard();
+        // Category::withoutEvents(function () {
+        //     Category::factory(100)->create();
+        // });
 
-        Category::factory(10)->create([
-            'created_by' => User::first(),
-        ])->each(function ($c) {
-            Post::factory()->cretae([
-                'category_id' => $c->id,
+        Category::withoutEvents(function () {
+            Category::factory(10)->create([
                 'created_by' => User::first(),
-            ]);
+            ])->each(function ($c) {
+                Post::withoutEvents(function () use ($c) {
+                    Post::factory()->create([
+                        'category_id' => $c->id,
+                        'created_by' => User::first(),
+                    ]);
+                });
+            });
         });
     }
 }

@@ -3,7 +3,6 @@
 namespace Modules\Post\Database\factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Foundation\Testing\WithoutEvents;
 use Illuminate\Support\Str;
 
 class CategoryFactory extends Factory
@@ -23,6 +22,7 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
+            'id' => Str::uuid(),
             'name' => Str::random(10),
             'description' => Str::random(10),
         ];

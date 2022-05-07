@@ -3,12 +3,12 @@
 namespace Modules\Post\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Modules\Core\Abstracts\CoreController;
 use Modules\Post\Entities\Category;
-use Spatie\QueryBuilder\QueryBuilder;
 use Modules\Post\Http\Requests\CategoryRequest;
 use Modules\Post\Transformers\CategoryResource;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class CategoryJsonController extends CoreController
 {

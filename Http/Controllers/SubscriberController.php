@@ -8,7 +8,7 @@ use Modules\Post\Datatable\SubscriberDatatable;
 
 class SubscriberController extends Controller
 {
-    public function index(): Response
+    public function __invoke(): Response
     {
         return inertia('Post::subscriber/index')->inertable(new SubscriberDatatable)->title(__('List of Subscribers'));
     }

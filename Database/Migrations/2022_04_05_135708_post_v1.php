@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
@@ -26,9 +25,9 @@ return new class extends Migration
 
         Schema::create('subscribers', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('name')->nullable();
-            $table->timestamp('subscribe_at');
+            $table->timestamp('subscribe_at')->nullable();
             $table->timestamp('unsubscribe_at')->nullable();
             $table->timestamps();
         });
