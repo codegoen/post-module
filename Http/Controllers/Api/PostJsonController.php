@@ -3,10 +3,10 @@
 namespace Modules\Post\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Modules\Core\Abstracts\CoreController;
 use Modules\Post\Entities\Post;
 use Modules\Post\Transformers\PostResource;
-use TiMacDonald\JsonApi\JsonApiResourceCollection;
 
 class PostJsonController extends CoreController
 {
@@ -23,7 +23,7 @@ class PostJsonController extends CoreController
      *      @OA\Response(response=402, description="Payment Required"),
      * )
      */
-    public function index(Request $request): JsonApiResourceCollection
+    public function index(Request $request): AnonymousResourceCollection
     {
         return PostResource::collection(
             Post::latest()->whereLike(['title', 'category.name'], $request->query('q'))->paginate($request->query('limit', 10))
