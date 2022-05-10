@@ -2,11 +2,12 @@
 
 namespace Modules\Post\Database\Seeders;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
-use Modules\Post\Entities\Category;
-use Modules\Post\Entities\Post;
 use Modules\Core\Entities\User;
+use Modules\Post\Entities\Post;
+use Modules\Post\Entities\Category;
+use Illuminate\Database\Eloquent\Model;
 
 class PostDatabaseSeeder extends Seeder
 {
@@ -17,20 +18,24 @@ class PostDatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // Category::withoutEvents(function () {
-        //     Category::factory(100)->create();
-        // });
+        $categories = ['Politics', 'Congress', 'Bussines', 'Economy', 'Investment'];
 
-        Category::withoutEvents(function () {
-            Category::factory(10)->create([
-                'created_by' => User::first(),
-            ])->each(function ($c) {
-                Post::withoutEvents(function () use ($c) {
-                    Post::factory()->create([
-                        'category_id' => $c->id,
-                        'created_by' => User::first(),
-                    ]);
-                });
+        Category::withoutEvents(function () use ($categories) {
+            collect($categories)->each(function ($value) {
+                Category::create([
+                    'id' => Str::uuid(),
+                    'name' => $value,
+                    'created_by' => User::first(),
+                ]);
+            });
+        });
+
+        Category::all()->each(function ($c) {
+            Post::withoutEvents(function () use ($c) {
+                Post::factory()->create([
+                    'category_id' => $c->id,
+                    'created_by' => User::first(),
+                ]);
             });
         });
     }

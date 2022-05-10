@@ -15,15 +15,15 @@ class NavigatorServiceProvider extends ServiceProvider
                 Nav::item(__('Post'))->subItems(
                     [
                         Nav::item(__('Post'))
-                            ->for('/post')
+                            ->for('/dashboard/post')
                             ->heroicon('PencilAltIcon')
                             ->icon('outline'),
                         Nav::item(__('Category'))
-                            ->for('/category')
+                            ->for('/dashboard/category')
                             ->heroicon('TagIcon')
                             ->icon('outline'),
                         Nav::item(__('Subscriber'))
-                            ->for('/subscriber')
+                            ->for('/dashboard/subscriber')
                             ->heroicon('MailIcon')
                             ->icon('outline'),
                     ]

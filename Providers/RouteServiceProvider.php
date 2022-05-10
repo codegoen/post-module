@@ -25,7 +25,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        require_once module_path('Post', '/Routes/admin/breadcrumbs.php');
+        require_once module_path('Post', '/Routes/web/breadcrumbs.php');
     }
 
     /**
@@ -49,8 +49,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::namespace($this->moduleNamespace)
-            ->group(module_path('Post', '/Routes/admin/web.php'));
+        Route::namespace($this->moduleNamespace)->prefix('dashboard')->as('dashboard.')
+            ->group(module_path('Post', '/Routes/web/index.php'));
     }
 
     /**

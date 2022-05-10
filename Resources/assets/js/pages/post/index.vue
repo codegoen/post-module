@@ -6,7 +6,10 @@
     :columns="inertable.columns"
   >
     <template #attributes>
-      <v-app-link href="/post/create" class="btn-purple btn-ring-purple">
+      <v-app-link
+        :href="$route('dashboard.post.create')"
+        class="btn-purple btn-ring-purple"
+      >
         New Post
       </v-app-link>
     </template>
@@ -21,15 +24,31 @@
     <template #action="{ item: { id } }">
       <div class="flex space-x-2">
         <v-app-link
-          :href="`/post/${id}/edit`"
-          class="rounded-md bg-yellow-400 p-2 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2"
+          :href="$route('dashboard.post.edit', { id })"
+          class="
+            rounded-md
+            bg-yellow-400
+            p-2
+            focus:outline-none
+            focus:ring-2
+            focus:ring-yellow-400
+            focus:ring-offset-2
+          "
         >
           <v-icon name="PencilIcon" type="solid" class="h-3 w-3 text-white" />
         </v-app-link>
         <button
           @click.prevent="destroy(id)"
           type="button"
-          class="rounded-md bg-red-500 p-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+          class="
+            rounded-md
+            bg-red-500
+            p-2
+            focus:outline-none
+            focus:ring-2
+            focus:ring-red-500
+            focus:ring-offset-2
+          "
         >
           <v-icon name="TrashIcon" type="solid" class="h-3 w-3 text-white" />
         </button>
@@ -55,7 +74,7 @@ export default {
         message: "This will permanently delete the post from database",
         onCancel: () => this.$modal.close(),
         onAccept: () => {
-          this.$inertia.delete(`/post/${id}`, {
+          this.$inertia.delete(this.$route("dashboard.post.destroy", { id }), {
             onSuccess: () => {
               this.$modal.close();
             },
