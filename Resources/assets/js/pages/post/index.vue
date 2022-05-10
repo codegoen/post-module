@@ -7,7 +7,7 @@
   >
     <template #attributes>
       <v-app-link
-        :href="$route('dashboard.post.create')"
+        :href="$route('dashboard.post.post.create')"
         class="btn-purple btn-ring-purple"
       >
         New Post
@@ -24,7 +24,7 @@
     <template #action="{ item: { id } }">
       <div class="flex space-x-2">
         <v-app-link
-          :href="$route('dashboard.post.edit', { id })"
+          :href="$route('dashboard.post.post.edit', { id })"
           class="
             rounded-md
             bg-yellow-400
@@ -74,7 +74,7 @@ export default {
         message: "This will permanently delete the post from database",
         onCancel: () => this.$modal.close(),
         onAccept: () => {
-          this.$inertia.delete(this.$route("dashboard.post.destroy", { id }), {
+          this.$inertia.delete(this.$route("dashboard.post.post.destroy", { id }), {
             onSuccess: () => {
               this.$modal.close();
             },

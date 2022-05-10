@@ -24,14 +24,30 @@
       <div class="flex space-x-2">
         <button
           @click.prevent="edit(id)"
-          class="rounded-md bg-yellow-400 p-2 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2"
+          class="
+            rounded-md
+            bg-yellow-400
+            p-2
+            focus:outline-none
+            focus:ring-2
+            focus:ring-yellow-400
+            focus:ring-offset-2
+          "
         >
           <v-icon name="PencilIcon" type="solid" class="h-3 w-3 text-white" />
         </button>
         <button
           @click.prevent="destroy(id)"
           type="button"
-          class="rounded-md bg-red-500 p-2 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+          class="
+            rounded-md
+            bg-red-500
+            p-2
+            focus:outline-none
+            focus:ring-2
+            focus:ring-red-500
+            focus:ring-offset-2
+          "
         >
           <v-icon name="TrashIcon" type="solid" class="h-3 w-3 text-white" />
         </button>
@@ -46,8 +62,8 @@ export default {
   },
   computed: {
     category() {
-      // 
-    }
+      //
+    },
   },
   methods: {
     create() {
@@ -71,11 +87,14 @@ export default {
         message: "This will permanently delete the category from database",
         onCancel: () => this.$modal.close(),
         onAccept: () => {
-          this.$inertia.delete(`/category/${id}`, {
-            onSuccess: () => {
-              this.$modal.close();
+          this.$inertia.delete(
+            this.$route("dashboard.post.category.destroy", { id }),
+            {
+              onSuccess: () => {
+                this.$modal.close();
+              },
             },
-          });
+          );
         },
       });
     },
