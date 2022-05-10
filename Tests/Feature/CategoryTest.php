@@ -9,12 +9,12 @@ beforeEach(function () {
 });
 
 it('has index page', function () {
-    $res = $this->get(route('category.index'));
+    $res = $this->get(route('dashboard.category.index'));
     $res->assertStatus(200);
 });
 
 it('can add new', function () {
-    $this->post(route('category.store'), [
+    $this->post(route('dashboard.category.store'), [
         'name' => 'new-category',
     ])->assertStatus(302)->assertSessionHasNoErrors();
 
@@ -23,7 +23,7 @@ it('can add new', function () {
 });
 
 it('can see name required error', function () {
-    $this->post(route('category.store'), [
+    $this->post(route('dashboard.category.store'), [
         'name' => null,
     ])->assertSessionHasErrors(['name']);
 });
@@ -33,7 +33,7 @@ it('can update category', function () {
         'name' => 'old-category',
     ]);
 
-    $this->put(route('category.update', $category->id), [
+    $this->put(route('dashboard.category.update', $category->id), [
         'name' => 'new-category',
     ])->assertStatus(302)->assertSessionHasNoErrors();
 
@@ -46,7 +46,7 @@ it('can delete', function () {
         'name' => 'old-category',
     ]);
 
-    $this->delete(route('category.destroy', $category->id));
+    $this->delete(route('dashboard.category.destroy', $category->id));
 
     $this->assertDatabaseHas('categories', [
         'deleted_at' => now(),

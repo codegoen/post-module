@@ -10,15 +10,15 @@ beforeEach(function () {
 });
 
 it('has post page', function () {
-    $this->get(route('post.index'))->assertStatus(200);
+    $this->get(route('dashboard.post.index'))->assertStatus(200);
 });
 
 it('has create page', function () {
-    $this->get(route('post.create'))->assertStatus(200);
+    $this->get(route('dashboard.post.create'))->assertStatus(200);
 });
 
 it('can see validated required error', function () {
-    $this->post(route('post.store'), ['title' => null, 'slug' => null, 'content' => null])
+    $this->post(route('dashboard.post.store'), ['title' => null, 'slug' => null, 'content' => null])
         ->assertSessionHasErrors(['title', 'slug', 'content']);
 });
 
@@ -35,7 +35,7 @@ it('can add new post', function () {
         ],
     ];
 
-    $this->post(route('post.store'), $data)
+    $this->post(route('dashboard.post.store'), $data)
         ->assertStatus(302)->assertSessionHasNoErrors();
 
     $this->assertDatabaseCount('posts', 1);
@@ -44,7 +44,7 @@ it('can add new post', function () {
 it('has edit page', function () {
     $post = Post::factory()->create();
 
-    $this->get(route('post.edit', $post->id))->assertStatus(200);
+    $this->get(route('dashboard.post.edit', $post->id))->assertStatus(200);
 });
 
 it('can update existing post', function () {
@@ -52,7 +52,7 @@ it('can update existing post', function () {
         'title' => 'old title',
     ]);
 
-    $this->put(route('post.update', $post->id), [
+    $this->put(route('dashboard.post.update', $post->id), [
         'title' => 'new title',
         'slug' => $post->slug,
         'content' => $post->content,
@@ -78,7 +78,7 @@ it('has soft deleted', function () {
 it('can delete post', function () {
     $post = Post::factory()->create();
 
-    $this->delete(route('post.destroy', $post->id))->assertStatus(302)->assertSessionHas('success');
+    $this->delete(route('dashboard.post.destroy', $post->id))->assertStatus(302)->assertSessionHas('success');
     $this->assertDatabaseHas('posts', [
         'deleted_at' => now(),
     ]);

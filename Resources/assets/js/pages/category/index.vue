@@ -40,15 +40,15 @@
   </v-inertable>
 </template>
 <script>
-import { mapGetters } from "vuex";
-
 export default {
   props: {
     inertable: Object,
   },
-  computed: mapGetters({
-    category: "category/getCategory",
-  }),
+  computed: {
+    category() {
+      // 
+    }
+  },
   methods: {
     create() {
       this.$modal.open({
