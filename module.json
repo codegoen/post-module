@@ -7,8 +7,5 @@
   "providers": ["Modules\\Post\\Providers\\PostServiceProvider"],
   "aliases": {},
   "files": [],
-  "requires": [],
-  "setting": {
-    "route": "dashboard.post.setting.index"
-  }
+  "requires": []
 }

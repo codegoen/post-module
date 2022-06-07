@@ -25,12 +25,12 @@
           :error="form.errors.slug"
         />
         <v-multi-select
-          label="Category"
-          :required="true"
-          :create-option="true"
-          url="select/category"
           v-model="form.category"
-          :error="form.errors.category"
+          :options="
+            async function (query) {
+              return await fetchLanguages(query); // check JS block for implementation
+            }
+          "
         />
         <div class="flex flex-row space-x-2">
           <v-loading-button2
@@ -43,31 +43,63 @@
     </div>
   </div>
 </template>
-<script>
-export default {
-  data() {
-    return {
-      form: this.$inertia.form({
-        title: null,
-        slug: null,
-        category: null,
-        content: null,
-      }),
-    };
+<script setup>
+import { watch } from "vue";
+import { slugable } from "~/utils/helper";
+import { useForm } from "@inertiajs/inertia-vue3";
+
+const form = useForm({
+  title: null,
+  slug: null,
+  category: null,
+  content: null,
+});
+
+const save = () => {
+  console.log(form);
+};
+
+watch(
+  () => form.title,
+  (newValue) => {
+    form.slug = slugable(newValue);
   },
-  methods: {
-    save() {
-      this.form.post(`/post`);
-    },
-  },
-  watch: {
-    "form.title": {
-      handler: function (value) {
-        if (value) {
-          this.form.slug = this.$helper.convertToSlug(value);
-        }
+);
+
+const fetchLanguages = async (query) => {
+  // From: https://www.back4app.com/database/paul-datasets/list-of-all-programming-languages/get-started/javascript/rest-api/fetch?objectClassSlug=dataset
+
+  let where = "";
+
+  if (query) {
+    where =
+      "&where=" +
+      encodeURIComponent(
+        JSON.stringify({
+          ProgrammingLanguage: {
+            $regex: `${query}|${query.toUpperCase()}|${
+              query[0].toUpperCase() + query.slice(1)
+            }`,
+          },
+        }),
+      );
+  }
+
+  const response = await fetch(
+    "https://parseapi.back4app.com/classes/All_Programming_Languages?order=ProgrammingLanguage&keys=ProgrammingLanguage" +
+      where,
+    {
+      headers: {
+        "X-Parse-Application-Id": "XpRShKqJcxlqE5EQKs4bmSkozac44osKifZvLXCL", // This is the fake app's application id
+        "X-Parse-Master-Key": "Mr2UIBiCImScFbbCLndBv8qPRUKwBAq27plwXVuv", // This is the fake app's readonly master key
       },
     },
-  },
+  );
+
+  const data = await response.json(); // Here you have the data that you need
+
+  return data.results.map((item) => {
+    return { value: item.ProgrammingLanguage, label: item.ProgrammingLanguage };
+  });
 };
 </script>
